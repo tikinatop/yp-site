@@ -5,18 +5,18 @@ var express          = require("express"),
     passport         = require("passport"),
     LocalStrategy    = require("passport-local"),
     Hotel            = require("./models/hotel"),
-    Comment          = require("./models/comment"),
+    Commentaire          = require("./models/commentaire"),
     User             = require("./models/user"),
     seedDB           = require("./seeds")
     ;
 
 // requiring routes
-var commentRoutes    = require("./routes/comments"),
+var commentaireRoutes    = require("./routes/commentaires"),
     hotelRoutes = require("./routes/hotels"),
     indexRoutes      = require("./routes/index")
     ;
 
-mongoose.connect("mongodb://localhost/yelp_camp_v8");
+mongoose.connect("mongodb://localhost/hotello");
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
@@ -42,9 +42,9 @@ app.use(function(req, res, next) {
 
 app.use("/",indexRoutes);
 app.use("/hotels",hotelRoutes);
-app.use("/hotels/:id/comments",commentRoutes);
+app.use("/hotels/:id/commentaires",commentaireRoutes);
 
 
 app.listen(3000,function(){
-    console.log("The YelpCamp Server has started.");
+    console.log("Le serveur a démarré");
 });

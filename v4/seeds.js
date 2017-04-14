@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
-var Campground = require("./models/campground");
-var Comment = require("./models/comment");
+var Hotel = require("./models/hotel");
+var Commentaire = require("./models/commentaire");
 
 var data = [
 {name: "Salmon Creek" , image:"https://farm9.staticflickr.com/8422/7842069486_c61e4c6025.jpg", 
@@ -15,25 +15,25 @@ description: "blah blah blah"},
 
 
 function seedDB(){
-	// Remove all campgrounds
-	Campground.remove({},function(err){
-		console.log((err) ? err : "Campgrounds removed!");
-		// add a few campgrounds
+	// Remove all hotels
+	Hotel.remove({},function(err){
+		console.log((err) ? err : "Hotels removed!");
+		// add a few hotels
 		data.forEach(function(seed){
-			Campground.create(seed,function(err,campground){
+			Hotel.create(seed,function(err,hotel){
 				if (err) {
 					console.log(err);
 				} else {
-					console.log("Added a new campground: " + campground.name);
-					Comment.create({
+					console.log("Added a new hotel: " + hotel.name);
+					Commentaire.create({
 						text: "This place is great, but I wish there was internet!",
 						author: "Homer"
-					}, function(err, comment){
+					}, function(err, commentaire){
 						if(err){
 							console.log(err)
 						} else {
-							campground.comments.push(comment);
-							campground.save();
+							hotel.commentaires.push(commentaire);
+							hotel.save();
 							console.log("Created new comment");
 						}
 					});

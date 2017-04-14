@@ -4,8 +4,8 @@ var express = require("express"),
 	mongoose = require("mongoose"),
 	passport = require("passport"),
 	LocalStrategy = require("passport-local"),
-	Campground = require("./models/campground"),
-	Comment = require("./models/comment"),
+	Hotel = require("./models/hotel"),
+	Commentaire = require("./models/commentaire"),
 	User = require("./models/user"),
 	seedDB = require("./seeds")
 	;
@@ -39,54 +39,54 @@ app.get("/", function(req,res){
 	res.render("landing");
 });
 
-//INDEX - show all campgrounds
-app.get("/campgrounds", function(req,res){
-	// Get all campgrounds from DB
-	Campground.find({}, function(err,allCampgrounds){
+//INDEX - show all hotels
+app.get("/hotels", function(req,res){
+	// Get all hotels from DB
+	Hotel.find({}, function(err,allHotels){
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("campgrounds/index",{campgrounds:allCampgrounds});
+			res.render("hotels/index",{hotels:allHotels});
 		}
 	});
 });
 
-//Add new campground to database
-app.post("/campgrounds", function(req,res){
-	// get data from form and add to campgrounds array
-	var newCampground = {
+//Add new hotel to database
+app.post("/hotels", function(req,res){
+	// get data from form and add to hotels array
+	var newHotel = {
 		name: req.body.name,
 		image: req.body.image,
 		description: req.body.description
 	};
-	// Create a new campground and save to DB
-	Campground.create(newCampground,function(err,newlyCreated){
+	// Create a new hotel and save to DB
+	Hotel.create(newHotel,function(err,newlyCreated){
 		if (err) {
 			console.log(err);
 		} else {
-			res.redirect("/campgrounds");
+			res.redirect("/hotels");
 		}
 	});
 });
 
 
-//NEW - show form to create new campground
-app.get("/campgrounds/new",function(req,res){
+//NEW - show form to create new hotel
+app.get("/hotels/new",function(req,res){
 
-	res.render("campgrounds/new");
+	res.render("hotels/new");
 });
 
-// SHOW - shows more info about one campground
-app.get("/campgrounds/:id",function(req,res){
-	// find the campground with provided ID
+// SHOW - shows more info about one hotel
+app.get("/hotels/:id",function(req,res){
+	// find the hotel with provided ID
 	// Mongoose method FindById
-	Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
+	Hotel.findById(req.params.id).populate("commentaires").exec(function(err, foundHotel){
 		if(err){
 			console.log(err);
 		} else {
-			console.log(foundCampground);
-		// render show template with that campground
-		res.render("campgrounds/show", {campground:foundCampground});	
+			console.log(foundHotel);
+		// render show template with that hotel
+		res.render("hotels/show", {hotel:foundHotel});	
 		}
 	});
 });
@@ -95,34 +95,34 @@ app.get("/campgrounds/:id",function(req,res){
 // COMMENTS ROUTES
 // ========================
 
-app.get("/campgrounds/:id/comments/new", isLoggedIn,function(req, res){
-	// find campground by id
-	Campground.findById(req.params.id, function(err, campground){
+app.get("/hotels/:id/commentaires/new", isLoggedIn,function(req, res){
+	// find hotel by id
+	Hotel.findById(req.params.id, function(err, hotel){
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("comments/new", {campground:campground});
+			res.render("commentaires/new", {hotel:hotel});
 		}
 	});
 });
 
-app.post("/campgrounds/:id/comments", isLoggedIn,function(req, res){
-	//lookup campground using ID
-	Campground.findById(req.params.id, function(err, campground){
+app.post("/hotels/:id/commentaires", isLoggedIn,function(req, res){
+	//lookup hotel using ID
+	Hotel.findById(req.params.id, function(err, hotel){
 		if (err) {
 			console.log(err);
-			res.redirect("/campgrounds");
+			res.redirect("/hotels");
 		} else {
 			// create new comment
-			Comment.create(req.body.comment, function(err, comment){
+			Commentaire.create(req.body.commentaire, function(err, commentaire){
 				if (err){
 					console.log(err);
 				} else {
-					// connect new comment to campground
-					campground.comments.push(comment);
-					campground.save();
-					// redirect campground show page
-					res.redirect("/campgrounds/"+campground._id);
+					// connect new comment to hotel
+					hotel.commentaires.push(commentaire);
+					hotel.save();
+					// redirect hotel show page
+					res.redirect("/hotels/"+hotel._id);
 				}
 			})
 		}
@@ -146,7 +146,7 @@ app.post("/register",function(req, res){
 			return res.render("register");
 		}
 		passport.authenticate("local")(req, res, function(){
-			res.redirect("/campgrounds");
+			res.redirect("/hotels");
 		});
 	});
 });
@@ -160,7 +160,7 @@ app.get("/login",function(req, res){
 // app.post("/login", middleware, callback)
 app.post("/login", passport.authenticate("local",
 	{
-		successRedirect: "/campgrounds",
+		successRedirect: "/hotels",
 		failureRedirect: "/login"
 	}) ,function(req, res){
 });
@@ -168,7 +168,7 @@ app.post("/login", passport.authenticate("local",
 // logout route
 app.get("/logout", function(req, res){
 	req.logout();
-	res.redirect("/campgrounds");
+	res.redirect("/hotels");
 });
 
 function isLoggedIn(req, res, next){

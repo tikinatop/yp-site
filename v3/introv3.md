@@ -9,7 +9,7 @@
 
 # Add the Comment model!
 * Make our errors go away!
-* Display comments on campground show page
+* Display comments on hotel show page
 
 # Comment New/Create
 * Discuss nested routes

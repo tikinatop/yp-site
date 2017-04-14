@@ -9,25 +9,25 @@ app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 
 // SCHEMA SETUP
-var campgroundSchema = new mongoose.Schema({
+var hotelSchema = new mongoose.Schema({
 	name:String,
 	image:String,
 	description:String
 });
 
-var Campground = mongoose.model("Campground",campgroundSchema);
+var Hotel = mongoose.model("Hotel",hotelSchema);
 
-// Campground.create(
+// Hotel.create(
 // 	{
 // 	name: "Granite Hill" , image:"https://farm5.staticflickr.com/4016/4369518024_0f64300987.jpg",
 // 	description:"This is a huge granite hill, no bathrooms, no water. Beautiful granite!!"
-// 	}, function(err,campground){
-// 		var result = (err) ? err : "Newly created campground.\n" + campground;
+// 	}, function(err,hotel){
+// 		var result = (err) ? err : "Newly created hotel.\n" + hotel;
 // 		console.log(result);
 // });
 
 
-	// var campgrounds = [
+	// var hotels = [
 	// {name: "Salmon Creek" , image:"https://farm9.staticflickr.com/8422/7842069486_c61e4c6025.jpg"},
 	// {name: "Granite Hill" , image:"https://farm5.staticflickr.com/4016/4369518024_0f64300987.jpg"},
 	// {name: "Mountain Goat's Rest" , image:"https://farm9.staticflickr.com/8225/8524305204_43934a319d.jpg"},
@@ -43,57 +43,57 @@ app.get("/", function(req,res){
 	res.render("landing");
 });
 
-//INDEX - show all campgrounds
-app.get("/campgrounds", function(req,res){
-	// Get all campgrounds from DB
-	Campground.find({}, function(err,allCampgrounds){
+//INDEX - show all hotels
+app.get("/hotels", function(req,res){
+	// Get all hotels from DB
+	Hotel.find({}, function(err,allHotels){
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("index",{campgrounds:allCampgrounds});
+			res.render("index",{hotels:allHotels});
 		}
 	});
-	// res.render("campgrounds",{campgrounds: campgrounds});
+	// res.render("hotels",{hotels: hotels});
 });
 
-//Add new campground to database
-app.post("/campgrounds", function(req,res){
-	// get data from form and add to campgrounds array
-	var newCampground = {
+//Add new hotel to database
+app.post("/hotels", function(req,res){
+	// get data from form and add to hotels array
+	var newHotel = {
 		name: req.body.name,
 		image: req.body.image,
 		description: req.body.description
 	};
-	// Create a new campground and save to DB
-	Campground.create(newCampground,function(err,newlyCreated){
+	// Create a new hotel and save to DB
+	Hotel.create(newHotel,function(err,newlyCreated){
 		if (err) {
 			console.log(err);
 		} else {
-			res.redirect("/campgrounds");
+			res.redirect("/hotels");
 		}
 	});
-	// redirect back to campgrounds page
-	// res.redirect("/campgrounds");
+	// redirect back to hotels page
+	// res.redirect("/hotels");
 	// res.send("hit the post route");
 });
 
 
-//NEW - show form to create new campground
-app.get("/campgrounds/new",function(req,res){
+//NEW - show form to create new hotel
+app.get("/hotels/new",function(req,res){
 
 	res.render("new");
 });
 
-// SHOW - shows more info about one campground
-app.get("/campgrounds/:id",function(req,res){
-	// find the campground with provided ID
+// SHOW - shows more info about one hotel
+app.get("/hotels/:id",function(req,res){
+	// find the hotel with provided ID
 	// Mongoose method FindById
-	Campground.findById(req.params.id, function(err, foundCampground){
+	Hotel.findById(req.params.id, function(err, foundHotel){
 		if(err){
 			console.log(err);
 		} else {
-		// render show template with that campground
-		res.render("show", {campground:foundCampground});	
+		// render show template with that hotel
+		res.render("show", {hotel:foundHotel});	
 		}
 	});
 })

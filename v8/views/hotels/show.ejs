@@ -22,17 +22,17 @@
             <div class="well">
                 <div class="text-right">
                     <p>
-                        <a class="btn btn-success green" href="/hotels/<%= hotel._id %>/comments/new">
+                        <a class="btn btn-success green" href="/hotels/<%= hotel._id %>/commentaires/new">
                             Add New Comment</a>
                         </p>
                     </div>
                     <hr>
-                    <% hotel.comments.forEach(function(comment){ %>
+                    <% hotel.commentaires.forEach(function(commentaire){ %>
                     <div class="row">
                         <div class="col-md-12">
-                            <strong><%= comment.author.username %></strong>
+                            <strong><%= commentaire.author.username %></strong>
                             <span class="pull-right">10 days ago</span> 
-                            <p><%= comment.text %></p>
+                            <p><%= commentaire.text %></p>
                         </div>
                     </div>
                     <% }) %>

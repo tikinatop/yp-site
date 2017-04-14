@@ -2,13 +2,13 @@
 
 <h1>This is the show template</h1>
 
-<p> <%= campground.name %> </p>
+<p> <%= hotel.name %> </p>
 
-<img src="<%= campground.image %>">
-<p><%= campground.description %></p>
+<img src="<%= hotel.image %>">
+<p><%= hotel.description %></p>
 
-<% campground.comments.forEach(function(comment){ %>
-	<p><strong><%= comment.author %></strong> - <%= comment.text %></p>
+<% hotel.commentaires.forEach(function(commentaire){ %>
+	<p><strong><%= commentaire.author %></strong> - <%= commentaire.text %></p>
 <% }) %>
 
 <% include partials/footer %>

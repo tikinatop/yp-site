@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Hotel = require("./models/hotel");
-var Comment = require("./models/comment");
+var Commentaire = require("./models/commentaire");
 
 var data = [
 {name: "Salmon Creek" , image:"https://farm9.staticflickr.com/8422/7842069486_c61e4c6025.jpg", 
@@ -25,16 +25,16 @@ function seedDB(){
                     console.log(err);
                 } else {
                     console.log("Added a new hotel: " + hotel.name);
-                    Comment.create({
+                    Commentaire.create({
                         text: "This place is great, but I wish there was internet!",
                         author: "Homer"
-                    }, function(err, comment){
+                    }, function(err, commentaire){
                         if(err){
                             console.log(err)
                         } else {
-                            hotel.comments.push(comment);
+                            hotel.commentaires.push(commentaire);
                             hotel.save();
-                            console.log("Created new comment");
+                            console.log("Created new commentaire");
                         }
                     });
                 }

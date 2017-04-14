@@ -4,16 +4,16 @@ var express 			= require("express"),
 	mongoose 			= require("mongoose"),
 	passport 			= require("passport"),
 	LocalStrategy 		= require("passport-local"),
-	Campground 			= require("./models/campground"),
-	Comment 			= require("./models/comment"),
+	Hotel 			= require("./models/hotel"),
+	Commentaire 			= require("./models/commentaire"),
 	User 				= require("./models/user"),
 	seedDB 				= require("./seeds")
 	;
 
 
 // requiring routes
-var commentRoutes 		= require("./routes/comments"),
-	campgroundRoutes 	= require("./routes/campgrounds"),
+var commentaireRoutes 		= require("./routes/commentaires"),
+	hotelRoutes 	= require("./routes/hotels"),
 	indexRoutes 		= require("./routes/index")
 	;
 
@@ -42,8 +42,8 @@ app.use(function(req, res, next) {
 });
 
 app.use("/",indexRoutes);
-app.use("/campgrounds",campgroundRoutes);
-app.use("/campgrounds/:id/comments",commentRoutes);
+app.use("/hotels",hotelRoutes);
+app.use("/hotels/:id/commentaires",commentaireRoutes);
 
 
 app.listen(3000,function(){
