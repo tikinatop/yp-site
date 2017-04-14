@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Campground = require("./models/campground");
+var Hotel = require("./models/hotel");
 var Comment = require("./models/comment");
 
 var data = [
@@ -15,34 +15,34 @@ description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab neque
 
 
 function seedDB(){
-	// Remove all campgrounds
-	Campground.remove({},function(err){
-		console.log((err) ? err : "Campgrounds removed!");
-		// add a few campgrounds
-		data.forEach(function(seed){
-			Campground.create(seed,function(err,campground){
-				if (err) {
-					console.log(err);
-				} else {
-					console.log("Added a new campground: " + campground.name);
-					Comment.create({
-						text: "This place is great, but I wish there was internet!",
-						author: "Homer"
-					}, function(err, comment){
-						if(err){
-							console.log(err)
-						} else {
-							campground.comments.push(comment);
-							campground.save();
-							console.log("Created new comment");
-						}
-					});
-				}
-			});
-		});
-		
-	});
+    // Remove all hotels
+    Hotel.remove({},function(err){
+        console.log((err) ? err : "Hotels removed!");
+        // add a few hotels
+        data.forEach(function(seed){
+            Hotel.create(seed,function(err,hotel){
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("Added a new hotel: " + hotel.name);
+                    Comment.create({
+                        text: "This place is great, but I wish there was internet!",
+                        author: "Homer"
+                    }, function(err, comment){
+                        if(err){
+                            console.log(err)
+                        } else {
+                            hotel.comments.push(comment);
+                            hotel.save();
+                            console.log("Created new comment");
+                        }
+                    });
+                }
+            });
+        });
+        
+    });
 
-	// add a few comments
+    // add a few comments
 }
 module.exports = seedDB;
