@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var hotelSchema = new mongoose.Schema({
-	name:String,
+	nom:String,
 	image:String,
 	description:String,
 	commentaires: [

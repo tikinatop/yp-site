@@ -1,7 +1,6 @@
-
 var express = require("express");
-var router = express.Router();
-var Hotel = require("../models/hotel");
+var router  = express.Router();
+var Hotel   = require("../models/hotel");
 
 //INDEX - show all hotels
 router.get("/", function(req,res){
@@ -19,7 +18,7 @@ router.get("/", function(req,res){
 router.post("/", function(req,res){
 	// get data from form and add to hotels array
 	var newHotel = {
-		name: req.body.name,
+		nom: req.body.nom,
 		image: req.body.image,
 		description: req.body.description
 	};
@@ -35,9 +34,9 @@ router.post("/", function(req,res){
 
 
 //NEW - show form to create new hotel
-router.get("/new",function(req,res){
+router.get("/nouveau",function(req,res){
 
-	res.render("hotels/new");
+	res.render("hotels/nouveau");
 });
 
 // SHOW - shows more info about one hotel
