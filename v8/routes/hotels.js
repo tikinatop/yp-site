@@ -2,28 +2,28 @@ var express = require("express");
 var router  = express.Router();
 var Hotel   = require("../models/hotel");
 
-//INDEX - show all hotels
+//INDEX - montre tous les hotels
 router.get("/", function(req,res){
-	// Get all hotels from DB
-	Hotel.find({}, function(err,allHotels){
+	// récupère tous les hotels depuis la BDD
+	Hotel.find({}, function(err,tousLesHotels){
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("hotels/index",{hotels:allHotels});
+			res.render("hotels/index",{hotels:tousLesHotels});
 		}
 	});
 });
 
-//CREATE - dd new hotel to database
+//CREATE - ajoute nouvel hotel à la BDD
 router.post("/", function(req,res){
-	// get data from form and add to hotels array
-	var newHotel = {
+	// récupère les données do formulaire et ajoute l'objet aux tableau tousLesHotels
+	var nouvelHotel = {
 		nom: req.body.nom,
 		image: req.body.image,
 		description: req.body.description
 	};
-	// Create a new hotel and save to DB
-	Hotel.create(newHotel,function(err,newlyCreated){
+	// crée un nouvel hotel et l'ajoute dans la BDD
+	Hotel.create(nouvelHotel,function(err,hotelCree){
 		if (err) {
 			console.log(err);
 		} else {
@@ -33,23 +33,23 @@ router.post("/", function(req,res){
 });
 
 
-//NEW - show form to create new hotel
+//NEW - montre le formulaire pour créer un nouvel hotel
 router.get("/nouveau",function(req,res){
 
 	res.render("hotels/nouveau");
 });
 
-// SHOW - shows more info about one hotel
+// SHOW - affiche la page d'informations de l'hotel séléctionné
 router.get("/:id",function(req,res){
-	// find the hotel with provided ID
-	// Mongoose method FindById
-	Hotel.findById(req.params.id).populate("commentaires").exec(function(err, foundHotel){
+	// trouve l'hotel correspondant à l'ID selectionné
+
+	Hotel.findById(req.params.id).populate("commentaires").exec(function(err, hotelTrouve){
 		if(err){
 			console.log(err);
 		} else {
-			console.log(foundHotel);
-		// render show template with that hotel
-		res.render("hotels/show", {hotel:foundHotel});	
+			console.log(hotelTrouve);
+		// affiche le template "show" avec l'hotel selectionné
+		res.render("hotels/show", {hotel:hotelTrouve});	
 		}
 	});
 });

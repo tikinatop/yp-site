@@ -6,7 +6,7 @@ var express 			= require("express"),
 	LocalStrategy 		= require("passport-local"),
 	Hotel 			= require("./models/hotel"),
 	Commentaire 			= require("./models/commentaire"),
-	User 				= require("./models/user"),
+	Utilisateur 				= require("./models/utilisateur"),
 	seedDB 				= require("./seeds")
 	;
 
@@ -31,13 +31,13 @@ app.use(require("express-session")({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(new LocalStrategy(Utilisateur.authenticate()));
+passport.serializeUtilisateur(Utilisateur.serializeUtilisateur());
+passport.deserializeUtilisateur(Utilisateur.deserializeUtilisateur());
 
-// middleware permettant de passer une variable en plus à totues les routes (res.render)
+// middleware permettant de passer une variable en plus à toutes les routes (res.render)
 app.use(function(req, res, next) {
-	res.locals.currentUser = req.user;
+	res.locals.utilisateurActuel = req.utilisateur;
 	next();
 });
 
@@ -47,5 +47,5 @@ app.use("/hotels/:id/commentaires",commentaireRoutes);
 
 
 app.listen(3000,function(){
-	console.log("The YelpCamp Server has started.");
+	console.log("Le serveur Hotello a démarré.");
 });

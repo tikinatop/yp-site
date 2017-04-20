@@ -42,9 +42,9 @@ CREATE      /hotels/:id/comments
 * Add public directory
 * Add custom stylesheet
 
-## Auth Pt.1 - Add User Model
+## Auth Pt.1 - Add Utilisateur Model
 * Install all packages needed for auth
-* Define User model
+* Define Utilisateur model
 
 ## Auth Pt.2 - Register
 * Configure Passport
@@ -57,7 +57,7 @@ CREATE      /hotels/:id/comments
 
 ## Auth Pt.4 - Logout/Navbar
 * Add logout route
-* Prevent user from adding a comment if not signed in
+* Prevent utilisateur from adding a comment if not signed in
 * Add links to navbar
 * Show/hide auth links correctly
 
@@ -67,6 +67,6 @@ CREATE      /hotels/:id/comments
 ## Refactor the Routes
 * Use Express router to reorganize all routes
 
-## Users + Comments
-* Associate users and comments
+## Utilisateurs + Comments
+* Associate utilisateurs and comments
 * Save author's name to a comment automatically

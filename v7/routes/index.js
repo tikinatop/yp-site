@@ -1,22 +1,22 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
-var User = require("../models/user");
+var Utilisateur = require("../models/utilisateur");
 
 router.get("/", function(req,res){
 	res.render("landing");
 });
 
 
-// show register form
+// montre le formulaire d'inscription
 router.get("/register",function(req, res){
 	res.render("register");
 });
 
-// handle sign up logic
+// fonction qui gère le processus d'inscription à la BDD
 router.post("/register",function(req, res){
-	var newUser = new User({username: req.body.username});
-	User.register(newUser, req.body.password, function(err, user){
+	var nouvelUtilisateur = new Utilisateur({nomutilisateur: req.body.nomutilisateur});
+	Utilisateur.register(nouvelUtilisateur, req.body.password, function(err, utilisateur){
 		if (err) {
 			console.log(err);
 			return res.render("register");
@@ -27,12 +27,12 @@ router.post("/register",function(req, res){
 	});
 });
 
-//show login form
+//montre le formulaire de connexion
 router.get("/login",function(req, res){
 	res.render("login");
 });
 
-// handle login logic
+// gère le processus de connexion
 // app.post("/login", middleware, callback)
 router.post("/login", passport.authenticate("local",
 	{

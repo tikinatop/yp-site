@@ -3,9 +3,9 @@ var router      = express.Router({mergeParams: true});
 var Hotel       = require("../models/hotel");
 var Commentaire = require("../models/commentaire");
 
-// Comments new
+// nouveau commantaire
 router.get("/nouveau", isLoggedIn,function(req, res){
-    // find hotel by id
+    // cherche hotel par id correspondant
     console.log(req.params.id);
     Hotel.findById(req.params.id, function(err, hotel){
         if (err) {
@@ -16,29 +16,29 @@ router.get("/nouveau", isLoggedIn,function(req, res){
     });
 });
 
-// Comments create
+// création du commentaire
 router.post("/", isLoggedIn,function(req, res){
-    //lookup hotel using ID
+    //
     Hotel.findById(req.params.id, function(err, hotel){
         if (err) {
             console.log(err);
             res.redirect("/hotels");
         } else {
-            // create new comment
+            // crée un nouveau commentaire
             Commentaire.create(req.body.commentaire, function(err, commentaire){
                 if (err){
                     console.log(err);
                 } else {
-                    // add username and id to comment
-                    commentaire.author.id = req.user._id;
-                    commentaire.author.username = req.user.username;
-                    // save comment
+                    // associe l'ID du commentaire à celui de l'utilisateur
+                    commentaire.author.id = req.utilisateur._id;
+                    commentaire.author.nomutilisateur = req.utilisateur.nomutilisateur;
+                    // sauve le commentaire
                     commentaire.save();
-                    // connect new comment to hotel
+                    // lie le nouveau commentaire à l'hotel
                     hotel.commentaires.push(commentaire);
                     hotel.save();
                     console.log(commentaire);
-                    // redirect hotel show page
+                    // redirige vers la page "show" de l'hotel
                     res.redirect("/hotels/"+hotel._id);
                 }
             })

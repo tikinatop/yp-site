@@ -4,7 +4,7 @@ var express = require("express"),
 	mongoose = require("mongoose"),
 	Hotel = require("./models/hotel"),
 	Commentaire = require("./models/commentaire"),
-	// User = require("./models/user"),
+	// Utilisateur = require("./models/utilisateur"),
 	seedDB = require("./seeds")
 	;
 
@@ -21,28 +21,28 @@ app.get("/", function(req,res){
 	res.render("landing");
 });
 
-//INDEX - show all hotels
+//INDEX - montre tous les hotels
 app.get("/hotels", function(req,res){
-	// Get all hotels from DB
-	Hotel.find({}, function(err,allHotels){
+	// récupère tous les hotels depuis la BDD
+	Hotel.find({}, function(err,tousLesHotels){
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("hotels/index",{hotels:allHotels});
+			res.render("hotels/index",{hotels:tousLesHotels});
 		}
 	});
 });
 
-//Add new hotel to database
+//ajoute nouvel hotel à la BDD
 app.post("/hotels", function(req,res){
-	// get data from form and add to hotels array
-	var newHotel = {
+	// récupère les données do formulaire et ajoute l'objet aux tableau tousLesHotels
+	var nouvelHotel = {
 		name: req.body.name,
 		image: req.body.image,
 		description: req.body.description
 	};
-	// Create a new hotel and save to DB
-	Hotel.create(newHotel,function(err,newlyCreated){
+	// crée un nouvel hotel et l'ajoute dans la BDD
+	Hotel.create(nouvelHotel,function(err,hotelCree){
 		if (err) {
 			console.log(err);
 		} else {
@@ -52,23 +52,23 @@ app.post("/hotels", function(req,res){
 });
 
 
-//NEW - show form to create new hotel
+//NEW - montre le formulaire pour créer un nouvel hotel
 app.get("/hotels/new",function(req,res){
 
 	res.render("hotels/new");
 });
 
-// SHOW - shows more info about one hotel
+// SHOW - affiche la page d'informations de l'hotel séléctionné
 app.get("/hotels/:id",function(req,res){
-	// find the hotel with provided ID
-	// Mongoose method FindById
-	Hotel.findById(req.params.id).populate("commentaires").exec(function(err, foundHotel){
+	// trouve l'hotel correspondant à l'ID selectionné
+
+	Hotel.findById(req.params.id).populate("commentaires").exec(function(err, hotelTrouve){
 		if(err){
 			console.log(err);
 		} else {
-			console.log(foundHotel);
-		// render show template with that hotel
-		res.render("hotels/show", {hotel:foundHotel});	
+			console.log(hotelTrouve);
+		// affiche le template "show" avec l'hotel selectionné
+		res.render("hotels/show", {hotel:hotelTrouve});	
 		}
 	});
 });
@@ -78,7 +78,7 @@ app.get("/hotels/:id",function(req,res){
 // ========================
 
 app.get("/hotels/:id/commentaires/new",function(req, res){
-	// find hotel by id
+	// cherche hotel par id correspondant
 	Hotel.findById(req.params.id, function(err, hotel){
 		if (err) {
 			console.log(err);
@@ -89,21 +89,21 @@ app.get("/hotels/:id/commentaires/new",function(req, res){
 });
 
 app.post("/hotels/:id/commentaires",function(req, res){
-	//lookup hotel using ID
+	//
 	Hotel.findById(req.params.id, function(err, hotel){
 		if (err) {
 			console.log(err);
 			res.redirect("/hotels");
 		} else {
-			// create new comment
+			// crée un nouveau commentaire
 			Commentaire.create(req.body.commentaire, function(err, commentaire){
 				if (err){
 					console.log(err);
 				} else {
-					// connect new comment to hotel
+					// lie le nouveau commentaire à l'hotel
 					hotel.commentaires.push(commentaire);
 					hotel.save();
-					// redirect hotel show page
+					// redirige vers la page "show" de l'hotel
 					res.redirect("/hotels/"+hotel._id);
 				}
 			})
@@ -113,5 +113,5 @@ app.post("/hotels/:id/commentaires",function(req, res){
 
 
 app.listen(3000,function(){
-	console.log("The YelpCamp Server has started.");
+	console.log("Le serveur Hotello a démarré.");
 });

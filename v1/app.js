@@ -28,12 +28,12 @@ app.get("/hotels", function(req,res){
 });
 
 app.post("/hotels", function(req,res){
-	// get data from form and add to hotels array
-	var newHotel = {
+	// récupère les données do formulaire et ajoute l'objet aux tableau tousLesHotels
+	var nouvelHotel = {
 		name: req.body.name,
 		image: req.body.image
 	};
-	hotels.push(newHotel)
+	hotels.push(nouvelHotel)
 	// redirect back to hotels page
 	res.redirect("/hotels");
 	// res.send("hit the post route");
@@ -45,5 +45,5 @@ app.get("/hotels/new",function(req,res){
 });
 
 app.listen(3000,function(){
-	console.log("The YelpCamp Server has started.");
+	console.log("Le serveur Hotello a démarré.");
 });
