@@ -15,7 +15,7 @@ router.get("/", function(req,res){
 });
 
 //CREATE - ajoute nouvel hotel à la BDD
-router.post("/", function(req,res){
+router.post("/",isLoggedIn, function(req,res){
 	// récupère les données do formulaire et ajoute l'objet aux tableau tousLesHotels
 	var nouvelHotel = {
 		nom: req.body.nom,
@@ -34,7 +34,7 @@ router.post("/", function(req,res){
 
 
 //NEW - montre le formulaire pour créer un nouvel hotel
-router.get("/nouveau",function(req,res){
+router.get("/nouveau", isLoggedIn, function(req,res){
 
 	res.render("hotels/nouveau");
 });
@@ -53,5 +53,33 @@ router.get("/:id",function(req,res){
 		}
 	});
 });
+
+// EDIT - hotel route
+router.get("/:id/modifier", function(req,res){
+	Hotel.findById(req.params.id, function(err, hotelTrouve){
+		if (err){
+			res.redirect("/hotels")
+		} else {
+			res.render("hotels/modifier",{hotel:hotelTrouve});
+		}
+	};)
+});
+
+// UPDATE route
+
+router.put("/:id", function(req,res){
+	Hotel.findByIdAndUpdate(req.params.id, req.body.hotel, function(err, hotelMaj){
+		if(err){
+			res.redirect("/hotels")
+		}
+	})
+});
+
+function isLoggedIn(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 module.exports = router;

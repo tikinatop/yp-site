@@ -4,6 +4,7 @@ var express              = require("express"),
     mongoose             = require("mongoose"),
     passport             = require("passport"),
     LocalStrategy        = require("passport-local"),
+    methodOverride       = require("method-override"),
     Hotel                = require("./models/hotel"),
     Commentaire          = require("./models/commentaire"),
     Utilisateur          = require("./models/utilisateur"),
@@ -20,7 +21,8 @@ mongoose.connect("mongodb://hotel-db:27017/hotello");
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
-// seedDB(); //seed the database
+app.use(methodOverride("_method"));
+seedDB(); //seed the database
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({

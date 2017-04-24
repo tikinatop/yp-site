@@ -1,7 +1,7 @@
-var express  = require("express");
-var router   = express.Router();
-var passport = require("passport");
-var Utilisateur     = require("../models/utilisateur");
+var express      = require("express");
+var router       = express.Router();
+var passport     = require("passport");
+var Utilisateur  = require("../models/utilisateur");
 
 // root route
 router.get("/", function(req,res){

@@ -2,17 +2,17 @@
 
 <div class="container">
     <div class="row">
-        <h1>Add New Comment to <%= hotel.nom %></h1>
+        <h1>Nouveau commentaire pour <%= hotel.nom %></h1>
 
         <form action="/hotels/<%= hotel._id %>/commentaires" method="POST">
             <div class="form-group">
-                <input class="form-control" type="text" name="commentaire[text]" placeholder="text">
+                <input class="form-control" type="text" name="commentaire[message]" placeholder="Entrez votre commentaire...">
             </div>
             
-            <button class="btn btn-lg btn-primary btn-block" >Submit!</button>
+            <button class="btn btn-lg btn-primary btn-block" >Soumettre!</button>
         </form>
 
-        <a href="/hotels">Go Back!</a>
+        <a href="/hotels">Revenir aux hotels</a>
     </div>
 </div>
 

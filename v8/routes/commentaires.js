@@ -30,8 +30,9 @@ router.post("/", isLoggedIn,function(req, res){
                     console.log(err);
                 } else {
                     // associe l'ID du commentaire à celui de l'utilisateur
-                    commentaire.author.id = req.utilisateur._id;
-                    commentaire.author.username = req.utilisateur.username;
+                    // user est une propriété de express
+                    commentaire.auteur.id = req.user._id;
+                    commentaire.auteur.username = req.user.username;
                     // sauve le commentaire
                     commentaire.save();
                     // lie le nouveau commentaire à l'hotel

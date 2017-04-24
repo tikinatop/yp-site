@@ -1,7 +1,7 @@
 var mongoose = require("mongoose");
 var commentaireSchema = new mongoose.Schema({
-    text: String,
-    author: {
+    message: String,
+    auteur: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Utilisateur"

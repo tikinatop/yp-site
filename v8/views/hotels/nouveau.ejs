@@ -2,7 +2,7 @@
 
 <div class="container">
     <div class="row">
-        <h1>Create a New Hotel</h1>
+        <h1>Créer un nouvel hotel</h1>
 
         <form action="/hotels" method="POST">
             <div class="form-group">
@@ -12,13 +12,15 @@
                 <input class="form-control" type="text" name="image" placeholder="image url">
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="description" placeholder="add your description here!">
+                <input class="form-control" type="text" name="description" placeholder="ajoutez votre description!">
             </div>
-            
-            <button class="btn btn-lg btn-primary btn-block" >Submit!</button>
+            <div class="form-group">
+                <input class="form-control" type="number" name="prix" step="any" placeholder="0"> €
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" >Soumettre!</button>
         </form>
 
-        <a href="/hotels">Go Back!</a>
+        <a href="/hotels">Revenir aux hotels</a>
     </div>
 </div>
 
