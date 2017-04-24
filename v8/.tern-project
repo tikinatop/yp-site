@@ -1,0 +1,12 @@
+{
+    "ecmaVersion": 5,
+    "plugins": {
+        "node": {},
+        "modules": {},
+	"node-express": {},
+        "es_modules": {},
+	"webpack": {
+	    "configPath" : "./lib/webpack.prod.js"
+	    }
+    }
+}

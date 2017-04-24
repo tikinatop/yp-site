@@ -31,7 +31,7 @@ router.post("/", isLoggedIn,function(req, res){
                 } else {
                     // associe l'ID du commentaire à celui de l'utilisateur
                     commentaire.author.id = req.utilisateur._id;
-                    commentaire.author.nomutilisateur = req.utilisateur.nomutilisateur;
+                    commentaire.author.username = req.utilisateur.username;
                     // sauve le commentaire
                     commentaire.save();
                     // lie le nouveau commentaire à l'hotel

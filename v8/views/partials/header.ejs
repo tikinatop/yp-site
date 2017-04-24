@@ -19,7 +19,7 @@
 		    <li><a href="/login">Se connecter</a></li>
 		    <li><a href="/register">S'inscrire</a></li>
 		<% } else { %>
-		    <li><a href="#">Connecté en tant que <%= utilisateurActuel.nomutilisateur %></a></li>
+		    <li><a href="#">Connecté en tant que <%= utilisateurActuel.username %></a></li>
 		    <li><a href="/logout">Déconnexion</a></li>
 		<% } %>
             </ul>

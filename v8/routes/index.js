@@ -16,7 +16,7 @@ router.get("/register",function(req, res){
 
 // fonction qui gère le processus d'inscription à la BDD
 router.post("/register",function(req, res){
-    var nouvelUtilisateur = new Utilisateur({nomutilisateur: req.body.nomutilisateur});
+    var nouvelUtilisateur = new Utilisateur({username: req.body.username});
     Utilisateur.register(nouvelUtilisateur, req.body.password, function(err, utilisateur){
         if (err) {
             console.log(err);

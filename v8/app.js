@@ -6,7 +6,7 @@ var express              = require("express"),
     LocalStrategy        = require("passport-local"),
     Hotel                = require("./models/hotel"),
     Commentaire          = require("./models/commentaire"),
-    Utilisateur                 = require("./models/utilisateur"),
+    Utilisateur          = require("./models/utilisateur"),
     seedDB               = require("./seeds")
     ;
 
@@ -16,7 +16,7 @@ var commentaireRoutes    = require("./routes/commentaires"),
     indexRoutes          = require("./routes/index")
     ;
 
-mongoose.connect("mongodb://localhost/hotello");
+mongoose.connect("mongodb://hotel-db:27017/hotello");
 app.set("view engine","ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname+"/public"));
@@ -31,12 +31,12 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(Utilisateur.authenticate()));
-passport.serializeUtilisateur(Utilisateur.serializeUtilisateur());
-passport.deserializeUtilisateur(Utilisateur.deserializeUtilisateur());
+passport.serializeUser(Utilisateur.serializeUser());
+passport.deserializeUser(Utilisateur.deserializeUser());
 
 // middleware permettant de passer une variable en plus à toutes les routes (res.render)
 app.use(function(req, res, next) {
-    res.locals.utilisateurActuel = req.utilisateur;
+    res.locals.utilisateurActuel = req.user;
     next();
 });
 
