@@ -70,7 +70,9 @@ router.get("/:id/modifier", function(req,res){
 router.put("/:id", function(req,res){
 	Hotel.findByIdAndUpdate(req.params.id, req.body.hotel, function(err, hotelMaj){
 		if(err){
-			res.redirect("/hotels")
+			res.redirect("/hotels");
+		} else {	
+			res.redirect("/hotels/" + req.params.id);
 		}
 	})
 });
