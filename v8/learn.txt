@@ -1,2 +1,0 @@
-docker run --name hotel -p 3000:3000 -v $(pwd):/var/www -w "/var/www" --link hotel-db:mongo node bash ./entrypoint
-docker run -d -p 27017:27017 --name hotel-db mongo

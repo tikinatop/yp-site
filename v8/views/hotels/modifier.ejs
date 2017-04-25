@@ -4,7 +4,7 @@
     <div class="row">
         <h1>Modifier <strong><%= hotel.nom %></strong></h1>
 
-        <form action="/hotels/<%= hotel._id %>/modifier?_method=PUT" method="POST">
+        <form action="/hotels/<%= hotel._id %>?_method=PUT" method="POST">
             <div class="form-group">
                 <input class="form-control" type="text" name="hotel[nom]" value="<%= hotel.nom %>">
             </div>
