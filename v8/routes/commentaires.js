@@ -4,7 +4,7 @@ var Hotel       = require("../models/hotel");
 var Commentaire = require("../models/commentaire");
 var middleware = require("../middleware")
 // nouveau commantaire
-router.get("/nouveau", middleware.isLoggedIn,function(req, res){
+router.get("/nouveau", middleware.estConnecte,function(req, res){
     // cherche hotel par id correspondant
     console.log(req.params.id);
     Hotel.findById(req.params.id, function(err, hotel){
@@ -17,7 +17,7 @@ router.get("/nouveau", middleware.isLoggedIn,function(req, res){
 });
 
 // création du commentaire
-router.post("/", middleware.isLoggedIn,function(req, res){
+router.post("/", middleware.estConnecte,function(req, res){
     //
     Hotel.findById(req.params.id, function(err, hotel){
         if (err) {

@@ -1,0 +1,18 @@
+#+TITLE: Colt Steele Bootcamp
+
+* Frameworks utilisés : 
+    - Express
+    - EJS
+    - Mongoose
+    - Bootstrap
+
+
+* Commandes Docker : 
+
+#+BEGIN_SRC bash
+docker run --name hotel -p 3000:3000 -v $(pwd):/var/www -w "/var/www" --link hotel-db:mongo node bash ./entrypoint
+docker run -d -p 27017:27017 --name hotel-db mongo
+#+END_SRC
+
+[[file:node.dockerfile][Dockerfile]]
+[[file:docker-compose.yml][YAML docker-compose]]

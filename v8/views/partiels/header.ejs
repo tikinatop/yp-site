@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Hotello</title>
@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav navbar-right">
 		<% if (!utilisateurActuel) { %>
 		    <li><a href="/login">Se connecter</a></li>
-		    <li><a href="/register">S'inscrire</a></li>
+		    <li><a href="/inscription">S'inscrire</a></li>
 		<% } else { %>
 		    <li><a href="#">Connecté en tant que <%= utilisateurActuel.username %></a></li>
 		    <li><a href="/logout">Déconnexion</a></li>

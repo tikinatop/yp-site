@@ -1,12 +1,13 @@
+
 <% include ../partiels/header %>
 
 <div class="container">
     <div class="row">
-        <h1>Nouveau commentaire pour <%= hotel.nom %></h1>
+<h1>Modifier le commentaire pour <strong>commentaire</strong></h1>
 
-        <form action="/hotels/<%= hotel._id %>/commentaires" method="POST">
+        <form action="/hotels/<%= c_id %>/commentaires/<%= commentaire._id %>?_method=PUT" method="POST">
             <div class="form-group">
-                <input class="form-control" type="text" name="commentaire[message]" placeholder="Entrez votre commentaire...">
+                <input class="form-control" type="text" name="commentaire[message]" placeholder="<%= commentaire.message %>">
             </div>
             
             <button class="btn btn-lg btn-primary btn-block" >Soumettre!</button>

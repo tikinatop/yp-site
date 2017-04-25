@@ -16,7 +16,7 @@ router.get("/", function(req,res){
 });
 
 //CREATE - ajoute nouvel hotel à la BDD
-router.post("/",middleware.isLoggedIn, function(req,res){
+router.post("/",middleware.estConnecte, function(req,res){
 	// récupère les données do formulaire et ajoute l'objet aux tableau tousLesHotels
 	var nouvelHotel = {
 		nom: req.body.nom,
@@ -40,7 +40,7 @@ router.post("/",middleware.isLoggedIn, function(req,res){
 
 
 //NEW - montre le formulaire pour créer un nouvel hotel
-router.get("/nouveau", middleware.isLoggedIn, function(req,res){
+router.get("/nouveau", middleware.estConnecte, function(req,res){
 
 	res.render("hotels/nouveau");
 });

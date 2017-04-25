@@ -5,22 +5,22 @@ var Utilisateur  = require("../models/utilisateur");
 
 // root route
 router.get("/", function(req,res){
-    res.render("landing");
+    res.render("lancement");
 });
 
 
 // montre le formulaire d'inscription
-router.get("/register",function(req, res){
-    res.render("register");
+router.get("/inscription",function(req, res){
+    res.render("inscription");
 });
 
 // fonction qui gère le processus d'inscription à la BDD
-router.post("/register",function(req, res){
+router.post("/inscription",function(req, res){
     var nouvelUtilisateur = new Utilisateur({username: req.body.username});
     Utilisateur.register(nouvelUtilisateur, req.body.password, function(err, utilisateur){
         if (err) {
             console.log(err);
-            return res.render("register");
+            return res.render("inscription");
         }
         passport.authenticate("local")(req, res, function(){
             res.redirect("/hotels");
@@ -49,7 +49,7 @@ router.get("/logout", function(req, res){
 });
 
 // middleware
-function isLoggedIn(req, res, next){
+function estConnecte(req, res, next){
     if(req.isAuthenticated()){
         return next();
     }
